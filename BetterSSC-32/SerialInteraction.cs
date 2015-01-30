@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO.Ports;
 using System.Windows.Forms;
 
-namespace RobotArm_CSharp
+namespace BetterSSC32
 {
     class SerialInteraction
     {

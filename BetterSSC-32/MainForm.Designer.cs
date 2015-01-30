@@ -1,4 +1,4 @@
-﻿namespace RobotArm_CSharp
+﻿namespace BetterSSC32
 {
     partial class MainForm
     {

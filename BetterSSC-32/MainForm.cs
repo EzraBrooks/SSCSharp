@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RobotArm_CSharp
+namespace BetterSSC32
 {
     public partial class MainForm : Form
     {
