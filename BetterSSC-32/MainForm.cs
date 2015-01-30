@@ -33,9 +33,18 @@ namespace BetterSSC32
         string command;
         string port;
 
-        public MainForm()
+        public MainForm(int numberOfServos)
         {
-            InitializeComponent();
+            Dictionary<string, MaskedTextBox> textBoxes = new Dictionary<string,MaskedTextBox>();
+            string iString;
+            for (int i = 0; i < numberOfServos; i++)
+            {
+                iString = i.ToString();
+                textBoxes.Add(iString, new MaskedTextBox());
+                //TODO automagically determine attributes of text boxes before drawing them
+                this.Controls.Add(textBoxes[i.ToString()]);
+            }
+                InitializeComponent();
         }
         
         private void button1_Click(object sender, EventArgs e)

@@ -29,7 +29,7 @@ namespace BetterSSC32
         {
             if (args.Length == 0)
             {
-                Application.Run(new MainForm());
+                Application.Run(new FirstRun());
             }
             else
             {

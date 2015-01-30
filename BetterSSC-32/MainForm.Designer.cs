@@ -63,7 +63,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(778, 314);
+            this.button2.Location = new System.Drawing.Point(827, 355);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(133, 63);
             this.button2.TabIndex = 3;
@@ -81,7 +81,7 @@
             this.Controls.Add(this.pulseWidthEntry);
             this.Controls.Add(this.button1);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "Better SSC-32";
             this.ResumeLayout(false);
             this.PerformLayout();
 

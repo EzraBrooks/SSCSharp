@@ -2,6 +2,7 @@
 {
     partial class AboutBox
     {
+        //TODO fix scrolling of info box
         /// <summary>
         /// Required designer variable.
         /// </summary>
