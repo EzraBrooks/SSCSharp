@@ -26,14 +26,8 @@ namespace BetterSSC32
 {
     class ServoController
     {
-        public SerialPort port;
-        public int[] pulseWidths;
-        
-        public ServoController()
-        {
-            port = new SerialPort("COM1");
-            portSetup();
-        }
+        private SerialPort port;
+        private int[] pulseWidths;
 
         public ServoController(string port)
         {
@@ -43,7 +37,7 @@ namespace BetterSSC32
 
         private void portSetup()
         {
-            //TODO add variable baud rate
+            //initialises with 115.2k baud rate because that's LynxTerm's default baud rate. Change with setBaudRate after instantiation if needed.
             port.BaudRate = 115200;
             port.Parity = Parity.None;
             port.StopBits = StopBits.One;
@@ -53,10 +47,11 @@ namespace BetterSSC32
 
         public void sendCommand(string command)
         {
-            Console.Write("Attempting to write " + command + " to port " + port.PortName + ".\n");
+            //Attempt to write command to serial port
             try {
                 port.Open();
                 port.Write(command + (char) 13);
+                port.Close();
             }
             catch (Exception e)
             {
@@ -69,15 +64,19 @@ namespace BetterSSC32
             if (numberOfServos > 32)
             {
                 numberOfServos = 32;
-                Console.Write("Too many servos passed to initialiseServos! Using 32 instead.");
+                //Can't have more than 32 servos on the SSC-32 board.
             }
             pulseWidths = new int[numberOfServos];
             for (int i = 0; i < numberOfServos; i++)
             {
-                port.Open();
-                port.Write("QP"+ i + (char) 13);
+                sendCommand("QP" + i);
                 pulseWidths[i] = Convert.ToInt32(port.ReadLine());
             }
+        }
+
+        public void setBaudRate(int baudRate)
+        {
+            port.BaudRate = baudRate;
         }
 
         public void setServoPosition(int servoPort, int position)
@@ -89,6 +88,16 @@ namespace BetterSSC32
         public void setServoPosition(int servoPort, int position, int speed)
         {
             string command = "#" + servoPort + "P" + position + "S" + speed;
+            sendCommand(command);
+        }
+
+        public void setServoPositions(int[] servoPorts, int position)
+        {
+            string command ="";
+            foreach (int servoPort in servoPorts)
+            {
+                command += "#" + servoPort + "P" + position;
+            }
             sendCommand(command);
         }
     }
