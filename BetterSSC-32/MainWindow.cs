@@ -33,6 +33,7 @@ namespace BetterSSC32
         ServoController controller = new ServoController("COM3");
         public static int numberOfServos;
         private TrackBar[] servoSliders;
+        private CheckBox[] servoInvertBoxes;
         public mainWindow()
         {
             Form servoQueryWindow = new servosPopup();
@@ -72,19 +73,21 @@ namespace BetterSSC32
             }
         }
         //TODO make universal inversion checkbox function (link trackbar and checkbox somehow)
-        /*private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void checkBox_CheckedChanged(object sender, EventArgs e)
         {
             //invert maximum and minimum of trackbar to invert values
+            string checkBoxName = (sender as System.Windows.Forms.CheckBox).Name;
+            int servoNumber = Convert.ToInt32(checkBoxName.Substring(checkBoxName.Length - 1));
             if ((sender as CheckBox).Checked)
             {
-                trackBar1.Maximum = 300;
-                trackBar1.Minimum = 2500;
+                servoSliders[servoNumber].Maximum = 300;
+                servoSliders[servoNumber].Minimum = 2500;
             }
             else
             {
-                trackBar1.Maximum = 2500;
-                trackBar1.Minimum = 300;
+                servoSliders[servoNumber].Maximum = 2500;
+                servoSliders[servoNumber].Minimum = 300;
             }
-        }*/
+        }
     }
 }

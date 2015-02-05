@@ -20,25 +20,14 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
-        /// 
-        /// Don't listen to the IDE. As long as you put valid code in here, it's very editable.
-        /// 
         private void InitializeComponent()
         {
+            this.SuspendLayout();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.SuspendLayout();
-            // 
-            // trackBar1
-            // 
-            //TODO instantiate trackbars and inversion checkboxes for number of servos
+            //
+            // Instantiate TrackBars for all registered servos
+            //
             servoSliders = new System.Windows.Forms.TrackBar[numberOfServos];
             for (int i = 0; i < numberOfServos; i++)
             {
@@ -56,12 +45,26 @@
                 servoSliders[i].TickStyle = System.Windows.Forms.TickStyle.Both;
                 servoSliders[i].Value = 300;
                 servoSliders[i].Scroll += new System.EventHandler(trackBar_Scroll);
-                if (i == 0)
-                {
-                    ((System.ComponentModel.ISupportInitialize)(servoSliders[i])).BeginInit();
-                }
                 this.Controls.Add(servoSliders[i]);
             }
+            // 
+            // Instantiate CheckBoxes for all registered servos
+            //
+            servoInvertBoxes = new System.Windows.Forms.CheckBox[numberOfServos];
+            for (int i = 0; i < numberOfServos; i++)
+            {
+                servoInvertBoxes[i] = new System.Windows.Forms.CheckBox();
+                servoInvertBoxes[i].AutoSize = true;
+                servoInvertBoxes[i].Location = new System.Drawing.Point(12 + (100 * i), 640);
+                servoInvertBoxes[i].Name = "checkBox" + i;
+                servoInvertBoxes[i].Size = new System.Drawing.Size(150, 30);
+                servoInvertBoxes[i].TabIndex = 3;
+                servoInvertBoxes[i].Text = "Invert";
+                servoInvertBoxes[i].UseVisualStyleBackColor = true;
+                this.Controls.Add(servoInvertBoxes[i]);
+            }
+            //TODO fix checkboxes
+            //this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // button1
             // 
@@ -83,38 +86,20 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 639);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(150, 29);
-            this.checkBox1.TabIndex = 3;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            //TODO fix checkboxes
-            //this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(998, 697);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Name = "mainWindow";
             this.Text = "Better SSC-32";
-            ((System.ComponentModel.ISupportInitialize)(servoSliders[0])).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
-        #endregion
-
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
