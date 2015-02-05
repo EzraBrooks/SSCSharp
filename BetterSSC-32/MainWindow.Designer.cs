@@ -1,4 +1,5 @@
-﻿namespace BetterSSC32
+﻿using System.Windows.Forms;
+namespace BetterSSC32
 {
     partial class mainWindow
     {
@@ -28,27 +29,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // trackBar1
             // 
-            this.trackBar1.LargeChange = 100;
-            this.trackBar1.Location = new System.Drawing.Point(25, 15);
-            this.trackBar1.Maximum = 2500;
-            this.trackBar1.Minimum = 300;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(90, 673);
-            this.trackBar1.SmallChange = 10;
-            this.trackBar1.TabIndex = 0;
-            this.trackBar1.TickFrequency = 50;
-            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
-            this.trackBar1.Value = 499;
-            this.trackBar1.Scroll += new System.EventHandler(this.trackBar_Scroll);
+            //TODO instantiate trackbars and inversion checkboxes for number of servos
+            servoSliders = new TrackBar[numberOfServos];
+            for (int i = 0; i < numberOfServos; i++)
+            {
+                servoSliders[i] = new TrackBar();
+                servoSliders[i].LargeChange = 100;
+                servoSliders[i].Location = new System.Drawing.Point(25 + (25 * i), 15);
+                servoSliders[i].Maximum = 2500;
+                servoSliders[i].Minimum = 300;
+                servoSliders[i].Name = "servoSlider" + i;
+                servoSliders[i].Orientation = System.Windows.Forms.Orientation.Vertical;
+                servoSliders[i].Size = new System.Drawing.Size(90, 615);
+                servoSliders[i].SmallChange = 10;
+                servoSliders[i].TabIndex = i;
+                servoSliders[i].TickFrequency = 50;
+                servoSliders[i].TickStyle = System.Windows.Forms.TickStyle.Both;
+                servoSliders[i].Value = 300;
+                servoSliders[i].Scroll += new System.EventHandler(trackBar_Scroll);
+                if (i == 0)
+                {
+                    ((System.ComponentModel.ISupportInitialize)(servoSliders[i])).BeginInit();
+                }
+                this.Controls.Add(servoSliders[i]);
+            }
             // 
             // button1
             // 
@@ -70,17 +81,29 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(12, 639);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(150, 29);
+            this.checkBox1.TabIndex = 3;
+            this.checkBox1.Text = "checkBox1";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            //TODO fix checkboxes
+            //this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(998, 697);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.trackBar1);
             this.Name = "mainWindow";
             this.Text = "Better SSC-32";
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(servoSliders[0])).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -88,8 +111,8 @@
 
         #endregion
 
-        private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }

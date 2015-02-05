@@ -31,26 +31,37 @@ namespace BetterSSC32
     public partial class mainWindow : Form
     {
         ServoController controller = new ServoController("COM3");
+        public static int numberOfServos;
+        private TrackBar[] servoSliders;
         public mainWindow()
         {
+            Form servoQueryWindow = new servosPopup();
+            servoQueryWindow.ShowDialog(this);
             InitializeComponent();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             controller.setServoPositions(new int[6] { 0, 1, 2, 3, 4, 5 }, 1500);
-            trackBar1.Value = 1500;
+            for (int i = 0; i < servoSliders.Length; i++)
+            {
+                servoSliders[i].Value = 1500;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             controller.setServoPositions(new int[6] { 0, 1, 2, 3, 4, 5 }, 0);
-            trackBar1.Value = 0;
+            for (int i = 0; i < servoSliders.Length; i++)
+            {
+                servoSliders[i].Value = 0;
+            }
         }
 
         private void trackBar_Scroll(object sender, System.EventArgs e)
         {
+            string trackBarName = (sender as System.Windows.Forms.TrackBar).Name;
+            int servoNumber = Convert.ToInt32(trackBarName.Substring(trackBarName.Length - 1));
             if ((sender as System.Windows.Forms.TrackBar).Value >= 500)
             {
                 controller.setServoPosition(1, (sender as System.Windows.Forms.TrackBar).Value);
@@ -60,5 +71,20 @@ namespace BetterSSC32
                 controller.setServoPosition(1, 0);
             }
         }
+        //TODO make universal inversion checkbox function (link trackbar and checkbox somehow)
+        /*private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            //invert maximum and minimum of trackbar to invert values
+            if ((sender as CheckBox).Checked)
+            {
+                trackBar1.Maximum = 300;
+                trackBar1.Minimum = 2500;
+            }
+            else
+            {
+                trackBar1.Maximum = 2500;
+                trackBar1.Minimum = 300;
+            }
+        }*/
     }
 }
