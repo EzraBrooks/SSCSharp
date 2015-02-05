@@ -20,7 +20,15 @@ namespace BetterSSC32
         private void confirmButton_Click(object sender, EventArgs e)
         {
             mainWindow.numberOfServos = Convert.ToInt32(servoCountEntry.Text);
-            (sender as Button).Parent
+            DialogResult = DialogResult.OK;
+        }
+
+        private void servoCountEntry_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
+            {
+                confirmButton.PerformClick();
+            }
         }
     }
 }

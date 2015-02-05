@@ -40,6 +40,7 @@
             this.servoCountEntry.Name = "servoCountEntry";
             this.servoCountEntry.Size = new System.Drawing.Size(163, 31);
             this.servoCountEntry.TabIndex = 0;
+            this.servoCountEntry.KeyDown += new System.Windows.Forms.KeyEventHandler(this.servoCountEntry_KeyDown);
             // 
             // label1
             // 

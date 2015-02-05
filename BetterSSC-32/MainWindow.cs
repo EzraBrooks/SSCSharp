@@ -54,7 +54,7 @@ namespace BetterSSC32
             controller.setServoPositions(new int[6] { 0, 1, 2, 3, 4, 5 }, 0);
             for (int i = 0; i < servoSliders.Length; i++)
             {
-                servoSliders[i].Value = 0;
+                servoSliders[i].Value = servoSliders[i].Minimum;
             }
         }
 
@@ -64,11 +64,11 @@ namespace BetterSSC32
             int servoNumber = Convert.ToInt32(trackBarName.Substring(trackBarName.Length - 1));
             if ((sender as System.Windows.Forms.TrackBar).Value >= 500)
             {
-                controller.setServoPosition(1, (sender as System.Windows.Forms.TrackBar).Value);
+                controller.setServoPosition(servoNumber, (sender as System.Windows.Forms.TrackBar).Value);
             }
             else
             {
-                controller.setServoPosition(1, 0);
+                controller.setServoPosition(servoNumber, 0);
             }
         }
         //TODO make universal inversion checkbox function (link trackbar and checkbox somehow)

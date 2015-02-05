@@ -1,5 +1,4 @@
-﻿using System.Windows.Forms;
-namespace BetterSSC32
+﻿namespace BetterSSC32
 {
     partial class mainWindow
     {
@@ -27,6 +26,9 @@ namespace BetterSSC32
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        /// 
+        /// Don't listen to the IDE. As long as you put valid code in here, it's very editable.
+        /// 
         private void InitializeComponent()
         {
             this.button1 = new System.Windows.Forms.Button();
@@ -37,12 +39,12 @@ namespace BetterSSC32
             // trackBar1
             // 
             //TODO instantiate trackbars and inversion checkboxes for number of servos
-            servoSliders = new TrackBar[numberOfServos];
+            servoSliders = new System.Windows.Forms.TrackBar[numberOfServos];
             for (int i = 0; i < numberOfServos; i++)
             {
-                servoSliders[i] = new TrackBar();
+                servoSliders[i] = new System.Windows.Forms.TrackBar();
                 servoSliders[i].LargeChange = 100;
-                servoSliders[i].Location = new System.Drawing.Point(25 + (25 * i), 15);
+                servoSliders[i].Location = new System.Drawing.Point(25 + (100 * i), 15);
                 servoSliders[i].Maximum = 2500;
                 servoSliders[i].Minimum = 300;
                 servoSliders[i].Name = "servoSlider" + i;
