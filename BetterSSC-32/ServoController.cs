@@ -74,6 +74,17 @@ namespace BetterSSC32
             }
         }
 
+        public void setSerialPort(string port)
+        {
+            this.port = new SerialPort(port);
+            portSetup();
+        }
+
+        public string getSerialPortName()
+        {
+            return this.port.PortName;
+        }
+
         public void setBaudRate(int baudRate)
         {
             port.BaudRate = baudRate;

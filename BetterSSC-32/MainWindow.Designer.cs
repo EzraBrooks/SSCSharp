@@ -25,6 +25,8 @@
             this.SuspendLayout();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.serialPortSelector = new System.Windows.Forms.ComboBox();
+            this.serialPortRefresh = new System.Windows.Forms.Button();
             //
             // Instantiate TrackBars for all registered servos
             //
@@ -58,19 +60,44 @@
                 servoInvertBoxes[i].Location = new System.Drawing.Point(12 + (100 * i), 640);
                 servoInvertBoxes[i].Name = "checkBox" + i;
                 servoInvertBoxes[i].Size = new System.Drawing.Size(150, 30);
-                servoInvertBoxes[i].TabIndex = 3;
+                servoInvertBoxes[i].TabIndex = numberOfServos + i;
                 servoInvertBoxes[i].Text = "Invert";
                 servoInvertBoxes[i].UseVisualStyleBackColor = true;
+                servoInvertBoxes[i].CheckedChanged += new System.EventHandler(checkBox_CheckedChanged);
                 this.Controls.Add(servoInvertBoxes[i]);
             }
-            //TODO fix checkboxes
-            //this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            //
+            // Serial port selector dropdown
+            //
+            this.serialPortSelector.Location = new System.Drawing.Point(680, 300);
+            this.serialPortSelector.Name = "serialPortSelector";
+            this.serialPortSelector.Size = new System.Drawing.Size(200, 50);
+            this.serialPortSelector.TabIndex = (numberOfServos * 2) + 1;
+            this.serialPortSelector.Text = "Select Serial Port";
+            this.serialPortSelector.Items.AddRange(System.IO.Ports.SerialPort.GetPortNames());
+            this.serialPortSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
+            foreach (string port in this.serialPortSelector.Items)
+            {
+                if (port == controller.getSerialPortName())
+                {
+                    this.serialPortSelector.SelectedIndex = this.serialPortSelector.FindStringExact(controller.getSerialPortName());
+                }
+            }
             // 
+            // Refresh serial port selector options
+            //
+            this.serialPortRefresh.Location = new System.Drawing.Point(680, 360);
+            this.serialPortRefresh.Name = "serialPortRefresh";
+            this.serialPortRefresh.Size = new System.Drawing.Size(200, 50);
+            this.serialPortRefresh.TabIndex = (numberOfServos * 2) + 2;
+            this.serialPortRefresh.Text = "Refresh Ports";
+            this.serialPortRefresh.Click += new System.EventHandler(refreshSerialPorts);
+            //
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(683, 538);
+            this.button1.Location = new System.Drawing.Point(680, 540);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(205, 86);
+            this.button1.Size = new System.Drawing.Size(200, 85);
             this.button1.TabIndex = 1;
             this.button1.Text = "All 1500";
             this.button1.UseVisualStyleBackColor = true;
@@ -78,9 +105,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(683, 424);
+            this.button2.Location = new System.Drawing.Point(680, 420);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(205, 83);
+            this.button2.Size = new System.Drawing.Size(200, 85);
             this.button2.TabIndex = 2;
             this.button2.Text = "All 0";
             this.button2.UseVisualStyleBackColor = true;
@@ -90,9 +117,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(998, 697);
+            this.ClientSize = new System.Drawing.Size(1024, 768);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.serialPortSelector);
+            this.Controls.Add(this.serialPortRefresh);
             this.Name = "mainWindow";
             this.Text = "Better SSC-32";
             this.ResumeLayout(false);
@@ -101,5 +130,7 @@
         }
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox serialPortSelector;
+        private System.Windows.Forms.Button serialPortRefresh;
     }
 }

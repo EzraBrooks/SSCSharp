@@ -25,17 +25,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
 
 namespace BetterSSC32
 {
     public partial class mainWindow : Form
     {
-        ServoController controller = new ServoController("COM3");
+        // Assume first active serial port
+        ServoController controller;
         public static int numberOfServos;
         private TrackBar[] servoSliders;
         private CheckBox[] servoInvertBoxes;
+
         public mainWindow()
         {
+            if (SerialPort.GetPortNames().Length > 0)
+            {
+                controller = new ServoController(SerialPort.GetPortNames()[0]);
+            }
+            else
+            {
+                controller = new ServoController("COM1"); 
+            }
             Form servoQueryWindow = new servosPopup();
             servoQueryWindow.ShowDialog(this);
             InitializeComponent();
@@ -72,12 +83,13 @@ namespace BetterSSC32
                 controller.setServoPosition(servoNumber, 0);
             }
         }
-        //TODO make universal inversion checkbox function (link trackbar and checkbox somehow)
+
         private void checkBox_CheckedChanged(object sender, EventArgs e)
         {
             //invert maximum and minimum of trackbar to invert values
             string checkBoxName = (sender as System.Windows.Forms.CheckBox).Name;
             int servoNumber = Convert.ToInt32(checkBoxName.Substring(checkBoxName.Length - 1));
+            this.SuspendLayout();
             if ((sender as CheckBox).Checked)
             {
                 servoSliders[servoNumber].Maximum = 300;
@@ -87,6 +99,17 @@ namespace BetterSSC32
             {
                 servoSliders[servoNumber].Maximum = 2500;
                 servoSliders[servoNumber].Minimum = 300;
+            }
+            this.ResumeLayout();
+        }
+
+        private void refreshSerialPorts(object sender, EventArgs e)
+        {
+            serialPortSelector.Items.Clear();
+            serialPortSelector.Items.AddRange(SerialPort.GetPortNames());
+            if (serialPortSelector.FindStringExact(controller.getSerialPortName()) != -1)
+            {
+                serialPortSelector.SelectedIndex = serialPortSelector.FindStringExact(controller.getSerialPortName());
             }
         }
     }
