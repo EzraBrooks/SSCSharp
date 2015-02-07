@@ -83,6 +83,7 @@
                     this.serialPortSelector.SelectedIndex = this.serialPortSelector.FindStringExact(controller.getSerialPortName());
                 }
             }
+            this.serialPortSelector.SelectedIndexChanged += new System.EventHandler(chooseSerialPort);
             // 
             // Refresh serial port selector options
             //

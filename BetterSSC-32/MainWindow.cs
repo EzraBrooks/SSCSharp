@@ -112,5 +112,11 @@ namespace BetterSSC32
                 serialPortSelector.SelectedIndex = serialPortSelector.FindStringExact(controller.getSerialPortName());
             }
         }
+
+        private void chooseSerialPort(object sender, EventArgs e)
+        {
+            string portName = (sender as ComboBox).Items[(sender as ComboBox).SelectedIndex].ToString();
+            controller.setSerialPort(portName);
+        }
     }
 }
