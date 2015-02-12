@@ -123,7 +123,7 @@ namespace SSCSharp{
         }
 
         /// <summary>
-        /// Set the position of a servo without specifying speed.
+        /// Set the position of a servo without specifying speed or time.
         /// </summary>
         /// <param name="servoPort">The port on the SSC-32 that the desired servo is connected to.</param>
         /// <param name="position">The position (and pulse width) you wish to set the servo to.</param>
