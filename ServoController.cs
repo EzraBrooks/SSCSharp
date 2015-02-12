@@ -137,11 +137,23 @@ namespace SSCSharp{
         /// Set the position of a servo with a specified rotation speed.
         /// </summary>
         /// <param name="servoPort">The port on the SSC-32 that the desired servo is connected to.</param>
-        /// <param name="position">The position (and pulse width) you wish to set the servo to.</param>
+        /// <param name="position">The position (and pulse width), 0-2500, you wish to set the servo to.</param>
         /// <param name="speed">The desired rotation speed in uS per second.</param>
         public void setServoPosition(int servoPort, int position, int speed)
         {
             string command = "#" + servoPort + "P" + position + "S" + speed;
+            sendCommand(command);
+        }
+
+        /// <summary>
+        /// Set the position of a servo with a specified time.
+        /// </summary>
+        /// <param name="servoPort">The port on the SSC-32 that the desired servo is connected to.</param>
+        /// <param name="position">The position (and pulse width), 0-2500, you wish to set the servo to.</param>
+        /// <param name="time">The desired rotation time in milliseconds.</param>
+        public void setServoPosition(int servoPort, int position, int time)
+        {
+            string command = "#" + servoPort + "P" + position + "T" + time;
             sendCommand(command);
         }
 
