@@ -83,10 +83,23 @@ namespace SSCSharp{
             }
         }
 
+        public SerialPort Port
+        {
+            get
+            {
+                return this.port;
+            }
+            set
+            {
+                port = value;
+                portSetup();
+            }
+        }
+
         /// <summary>
         /// Gets the serial port name for the instance.
         /// </summary>
-        public string portName
+        public string PortName
         {
             get
             {
@@ -97,7 +110,7 @@ namespace SSCSharp{
         /// <summary>
         /// Gets or sets the baud rate of the serial port for the instance.
         /// </summary>
-        public int baudRate
+        public int BaudRate
         {
             get
             {
