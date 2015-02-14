@@ -17,8 +17,6 @@
 */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.IO.Ports;
 
 /// <summary>
@@ -37,7 +35,6 @@ namespace SSCSharp{
         /// "pulseWidths" stores the positions of the servos connected to the controller.
         /// </summary>
         private SerialPort port;
-        private int[] pulseWidths;
 
         /// <summary>
         /// The constructor for a ServoController object.
