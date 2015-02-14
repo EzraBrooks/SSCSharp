@@ -79,7 +79,10 @@ namespace SSCSharp{
                 Console.Write("An error occurred. Exiting and writing error to console.\n" + e);
             }
         }
-
+        
+        /// <summary>
+        /// Get or set the SerialPort object over which to send commands.
+        /// </summary>
         public SerialPort Port
         {
             get
