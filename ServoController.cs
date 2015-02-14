@@ -32,7 +32,6 @@ namespace SSCSharp{
     {
         /// <summary>
         /// "port" stores the SerialPort object that the instantiated ServoController object is connected to.
-        /// "pulseWidths" stores the positions of the servos connected to the controller.
         /// </summary>
         private SerialPort port;
 
@@ -76,12 +75,12 @@ namespace SSCSharp{
             }
             catch (Exception e)
             {
-                Console.Write("An error occurred. Exiting and writing error to console.\n" + e);
+                Console.Write("An error occurred in sending a command. Writing error to console.\n" + e);
             }
         }
         
         /// <summary>
-        /// Get or set the SerialPort object over which to send commands.
+        /// Gets or sets the SerialPort object over which to send commands.
         /// </summary>
         public SerialPort Port
         {
@@ -123,7 +122,7 @@ namespace SSCSharp{
         }
 
         /// <summary>
-        /// Set the position of a servo without specifying speed or time.
+        /// Sets the position of a servo without specifying speed or time.
         /// </summary>
         /// <param name="servoPort">The port on the SSC-32 that the desired servo is connected to.</param>
         /// <param name="position">The position (and pulse width) you wish to set the servo to.</param>
@@ -134,7 +133,7 @@ namespace SSCSharp{
         }
 
         /// <summary>
-        /// Set the position of a servo with a specified time.
+        /// Sets the position of a servo with a specified movement time in ms.
         /// </summary>
         /// <param name="servoPort">The port on the SSC-32 that the desired servo is connected to.</param>
         /// <param name="position">The position (and pulse width), 0-2500, you wish to set the servo to.</param>
