@@ -46,6 +46,14 @@ namespace SSCSharp{
         }
 
         /// <summary>
+        /// Destructor for the class closes the port.
+        /// </summary>
+        public ~ServoController()
+        {
+            port.Close();
+        }
+
+        /// <summary>
         /// portSetup is a private method called when a ServoController object is instantiated or when the port is changed.
         /// It deals with setting the necessary attributes on the SerialPort object to communicate with the SSC-32.
         /// The port, by default, is set to 115.2k baud, but you can change that with setBaudRate. <seealso cref="setBaudRate"/>
@@ -57,6 +65,7 @@ namespace SSCSharp{
             port.StopBits = StopBits.One;
             port.DataBits = 8;
             port.Handshake = Handshake.None;
+            port.Open();
         }
 
         /// <summary>
@@ -69,9 +78,7 @@ namespace SSCSharp{
             //Attempt to write command to serial port
             try
             {
-                port.Open();
                 port.Write(command + (char)13);
-                port.Close();
             }
             catch (Exception e)
             {
@@ -90,6 +97,7 @@ namespace SSCSharp{
             }
             set
             {
+                port.Close();
                 port = value;
                 portSetup();
             }
