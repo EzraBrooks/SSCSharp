@@ -48,7 +48,7 @@ namespace SSCSharp{
         /// <summary>
         /// Destructor for the class closes the port.
         /// </summary>
-        public ~ServoController()
+        ~ServoController()
         {
             port.Close();
         }
