@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EzraBrooks.SSCSharp.Properties")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("SSCSharp")]
+[assembly: AssemblyDescription("A C# wrapper class for interacting with SSC-32 servo controllers over serial.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("EzraBrooks.SSCSharp.Properties")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCompany("Ezra Brooks")]
+[assembly: AssemblyProduct("SSCSharp")]
+[assembly: AssemblyCopyright("2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
