@@ -27,7 +27,7 @@ using System.IO.Ports;
 /// needed a better way to control SSC-32-based robotics equipment than the software Lynxmotion ships.
 /// </remarks>
 
-namespace SSCSharp{
+namespace EzraBrooks.SSCSharp{
     public class ServoController
     {
         /// <summary>
