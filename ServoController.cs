@@ -35,6 +35,8 @@ namespace EzraBrooks.SSCSharp{
         /// </summary>
         private SerialPort port;
 
+        public Servo[] Servos = new Servo[32];
+
         /// <summary>
         /// The constructor for a ServoController object.
         /// </summary>
@@ -43,6 +45,11 @@ namespace EzraBrooks.SSCSharp{
         {
             this.port = new SerialPort(port);
             portSetup();
+            //Instantiate Servos array
+            for (int i = 0; i < Servos.Length; i++)
+            {
+                Servos[i] = new Servo(this, i);
+            }
         }
 
         /// <summary>
@@ -127,44 +134,6 @@ namespace EzraBrooks.SSCSharp{
             {
                 port.BaudRate = value;
             }
-        }
-
-        /// <summary>
-        /// Sets the position of a servo without specifying speed or time.
-        /// </summary>
-        /// <param name="servoPort">The port on the SSC-32 that the desired servo is connected to.</param>
-        /// <param name="position">The position (and pulse width) you wish to set the servo to.</param>
-        public void setServoPosition(int servoPort, int position)
-        {
-            string command = "#" + servoPort + "P" + position;
-            sendCommand(command);
-        }
-
-        /// <summary>
-        /// Sets the position of a servo with a specified movement time in ms.
-        /// </summary>
-        /// <param name="servoPort">The port on the SSC-32 that the desired servo is connected to.</param>
-        /// <param name="position">The position (and pulse width), 0-2500, you wish to set the servo to.</param>
-        /// <param name="time">The desired rotation time in milliseconds.</param>
-        public void setServoPosition(int servoPort, int position, int time)
-        {
-            string command = "#" + servoPort + "P" + position + "T" + time;
-            sendCommand(command);
-        }
-
-        /// <summary>
-        /// Sets multiple servos to one position.
-        /// </summary>
-        /// <param name="servoPorts">A list of servos to set to the desired position.</param>
-        /// <param name="position">The desired position (and pulse width) you wish to set the servos to.</param>
-        public void setServoPositions(int[] servoPorts, int position)
-        {
-            string command = "";
-            foreach (int servoPort in servoPorts)
-            {
-                command += "#" + servoPort + "P" + position;
-            }
-            sendCommand(command);
         }
     }
 }
