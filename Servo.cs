@@ -34,9 +34,9 @@ namespace EzraBrooks.SSCSharp
             }
             set
             {
+                position = value;
                 //0 time is okay, because the servo controller can take more time to move if it has to
                 controller.sendCommand("#" + servoPort + "P" + position + "T" + time);
-                position = value;
             }
         }
 
