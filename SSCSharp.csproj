@@ -6,7 +6,7 @@
     <ProjectGuid>{BB3D3529-5219-4ED6-8418-7FA1C7AA74B8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <NoStandardLibraries>false</NoStandardLibraries>
-    <AssemblyName>SSCSharp</AssemblyName>
+    <AssemblyName>EzraBrooks.SSCSharp</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
